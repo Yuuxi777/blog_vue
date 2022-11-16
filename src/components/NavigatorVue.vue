@@ -89,7 +89,7 @@ export default {
   float: right;
   font-size: 15px;
   line-height: 80px;
-  margin-left: 30px;
+  margin-left: 1.5%;
   right: 3%;
   color: rgba(139, 139, 139, 1);
 }

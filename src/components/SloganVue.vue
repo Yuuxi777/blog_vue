@@ -24,10 +24,9 @@ export default {
   background-color: rgba(245, 245, 245, 0.7);
   font-size: 60px;
   position: relative;
-  width: 800px;
+  width: 50%;
   height: 100px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 25%;
   top: 200px;
   text-align: center;
   line-height: 100px;
