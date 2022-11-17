@@ -2,6 +2,7 @@
   <div id="HomePage">
     <SloganVue></SloganVue>
     <div id="blogBox">
+      <SearchOption></SearchOption>
       <p id="recentPost">最近发布</p>
       <RecentBlog></RecentBlog>
     </div>
@@ -15,6 +16,7 @@ import SloganVue from "@/components/SloganVue.vue";
 import CopyRight from "../components/CopyRight.vue";
 import ToTop from "@/components/ToTop.vue";
 import RecentBlog from "@/components/RecentBlog.vue";
+import SearchOption from "@/components/SearchOption.vue";
 export default {
   name: "HomePage",
   data() {
@@ -27,6 +29,7 @@ export default {
     CopyRight,
     ToTop,
     RecentBlog,
+    SearchOption,
   },
   methods: {},
   mounted() {},
@@ -53,7 +56,7 @@ export default {
   font-size: 40px;
   color: rgb(59, 59, 59);
   left: 10%;
-  top: 30px;
+  top: 50px;
 }
 
 </style>

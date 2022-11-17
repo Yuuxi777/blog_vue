@@ -11,6 +11,7 @@ import UploadPage from '../views/UploadPage.vue'
 import LoginPage from '../views/LoginPage.vue'
 import SelectOption from '../views/SelectOption.vue'
 import UploadPhoto from '../views/UploadPhoto.vue'
+import SearchPage from '../views/SearchPage.vue'
 
 Vue.use(VueRouter)
 
@@ -75,7 +76,11 @@ const routes = [
     name:'shangchuanzhaopian',
     component:UploadPhoto,
   },
-
+  {
+    path:'/result',
+    name:'jieguo',
+    component:SearchPage,
+  },
 ]
 
 const router = new VueRouter({

@@ -29,7 +29,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #uploadBlog {
   position: absolute;
   width: 10%;

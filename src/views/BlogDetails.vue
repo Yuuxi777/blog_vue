@@ -2,11 +2,6 @@
   <div id="blogBox">
     <div id="blog">
       <div id="title" class="markdown-body" v-html="convert(blog.title)"></div>
-      <!-- <div
-        id="category"
-        class="markdown-body"
-        v-html="convert(blog.category)"
-      ></div> -->
       <div
         id="content"
         class="markdown-body"

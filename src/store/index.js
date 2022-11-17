@@ -11,10 +11,13 @@ export default new Vuex.Store({
     curpage: 1,
     blog: [],
     isLogin: -1,
+    keyword: "",
   },
+
   //getter
   getters: {
   },
+
   //setter
   mutations: {
     saveStart(state, start) {
@@ -22,7 +25,6 @@ export default new Vuex.Store({
     },
     saveEnd(state, end) {
       state.end = end;
-
     },
     saveBlog(state, blog) {
       state.blog = blog;
@@ -32,7 +34,10 @@ export default new Vuex.Store({
     },
     saveIsLogin(state, isLogin) {
       state.isLogin = isLogin;
-    }
+    },
+    saveKeyword(state, keyword) {
+      state.keyword = keyword;
+    },
   },
   actions: {
   },
