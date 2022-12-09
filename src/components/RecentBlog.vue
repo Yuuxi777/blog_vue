@@ -1,26 +1,29 @@
 <template>
   <div>
-    <div
-      id="blogInfo"
-      v-for="blog in blogs"
-      :key="blog.id"
-      @click="getBlogById(blog.id)"
-    >
-      <p id="bTitle">{{ blog.title }}</p>
-      <p id="bContent">
+    <div id="blogInfo" v-for="blog in blogs" :key="blog.id">
+      <p id="bTitle" @click="getBlogById(blog.id)">{{ blog.title }}</p>
+      <p id="bContent" @click="getBlogById(blog.id)">
         {{ blog.content }}
       </p>
       <div id="timeBox">
-        <img id="timeImg" src="../assets/bcreatetime.png" alt="" />
+        <img id="timeImg" src="@/assets/bcreatetime.png" alt="" />
         <p id="bCreateTime">{{ blog.createTime }}</p>
       </div>
       <div id="categoriesBox">
-        <img id="categoriesImg" src="../assets/bcategories.png" alt="" />
+        <img id="categoriesImg" src="@/assets/bcategories.png" alt="" />
         <p id="bCategories">{{ blog.category }}</p>
       </div>
       <div id="authorBox">
-        <img id="authorImg" src="../assets/bauthor.png" alt="" />
+        <img id="authorImg" src="@/assets/bauthor.png" alt="" />
         <p id="bAuthor">花卡茶</p>
+      </div>
+      <div id="likeBox">
+        <img
+          id="likeImg"
+          :src="[likes[blog.id-65] == 1 ? lTrue : lFalse]"
+          @click="setLike(blog.id)"
+        />
+        <p id="bLike">{{ blog.likes }}</p>
       </div>
     </div>
   </div>
@@ -35,14 +38,43 @@ export default {
     return {
       blogs: [],
       blog: [],
+      likes: [],
+      lTrue: require("@/assets/like_true.png"),
+      lFalse: require("@/assets/like_false.png"),
     };
   },
   methods: {
     convert(str) {
       return marked.parse(str);
     },
-    getRecentBlog(num) {
+    async isLikeById(id) {
+      await this.axios({
+        method: "GET",
+        url: "/isLikeById",
+        params: {
+          id: id,
+        },
+      }).then((response) => {
+        console.log(response.data)
+        return response.data.data;
+      });
+    },
+    async setLike(id) {
       this.axios({
+        method: "POST",
+        url: "/setLikesById",
+        params: {
+          id: id,
+        },
+      }).then((response) => {
+        console.log(response.data);
+        if (response.data.data == -1) {
+          alert("您已经点过赞了！");
+        }
+      });
+    },
+    async getRecentBlog(num) {
+      await this.axios({
         method: "GET",
         url: "/getRecentBlog",
         params: {
@@ -51,12 +83,15 @@ export default {
       }).then(
         (response) => {
           this.blogs = response.data.data;
-          // console.log(this.blogs);
         },
         (err) => {
           console.log(err.response);
         }
       );
+      for (let i = 0; i < this.blogs.length; i++) {
+        this.likes[i] = this.isLikeById(this.blogs[i].id);
+      }
+      
     },
     async getBlogById(id) {
       await this.axios({
@@ -176,7 +211,15 @@ p {
 #bAuthor {
   position: absolute;
   bottom: 5px;
-  right: 25px;
+  right: 9%;
+  color: rgb(141, 141, 141);
+  user-select: none;
+}
+
+#bLike {
+  position: absolute;
+  bottom: 5px;
+  right: 1.5%;
   color: rgb(141, 141, 141);
   user-select: none;
 }
@@ -184,6 +227,7 @@ p {
 img {
   position: absolute;
   transform: scale(0.5);
+  user-select: none;
 }
 
 #timeImg {
@@ -198,6 +242,11 @@ img {
 
 #authorImg {
   bottom: -5px;
-  right: 70px;
+  right: 15%;
+}
+
+#likeImg {
+  bottom: -5px;
+  right: 2%;
 }
 </style>

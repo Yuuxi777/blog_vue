@@ -10,7 +10,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.prototype.axios = axios;
 Vue.config.productionTip = false
-axios.defaults.baseURL="http://124.222.212.180:8081";
+axios.defaults.baseURL="http://localhost:8081";
 Vue.use(mavonEditor)
 Vue.use(Element);
 
